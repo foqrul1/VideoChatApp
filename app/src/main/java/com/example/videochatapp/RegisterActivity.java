@@ -18,7 +18,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
@@ -65,7 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(RegisterActivity.this, "Please write Verified Code first", Toast.LENGTH_SHORT).show();
                     }else{
                         loadingBar.setTitle("Code Verification...");
-                        loadingBar.setMessage("Please Wait we are verifying your phonr");
+                        loadingBar.setMessage("Please Wait we are verifying your phone");
                         loadingBar.setCanceledOnTouchOutside(false);
                         loadingBar.show();
 
@@ -78,7 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                     if(!PhoneNumber.equals("")){
                         loadingBar.setTitle("Code Verification...");
-                        loadingBar.setMessage("Please Wait we are verifying your phonr");
+                        loadingBar.setMessage("Please Wait we are verifying your phone");
                         loadingBar.setCanceledOnTouchOutside(false);
                         loadingBar.show();
 
@@ -130,7 +129,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onStart();
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if(firebaseUser != null){
-            Intent homeIntent = new Intent(RegisterActivity.this, MainActivity.class);
+            Intent homeIntent = new Intent(RegisterActivity.this, ConatctActivity.class);
             startActivity(homeIntent);
             finish();
         }
@@ -157,7 +156,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
     private void SendUserToMainActivity(){
-        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+        Intent intent = new Intent(RegisterActivity.this, ConatctActivity.class);
         startActivity(intent);
         finish();
     }

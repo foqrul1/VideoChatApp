@@ -3,19 +3,22 @@ package com.example.videochatapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-public class MainActivity extends AppCompatActivity {
+public class ConatctActivity extends AppCompatActivity {
+    private BottomNavigationView navigationView;
+    private RecyclerView mContactList;
+    private ImageView findPeopleBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +27,18 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
         navView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
+        navigationView = findViewById(R.id.nav_view);
+        mContactList = findViewById(R.id.myContactList);
+        findPeopleBtn = findViewById(R.id.findPeoplebtn);
+        mContactList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        findPeopleBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ConatctActivity.this, FindPeopleActivity.class);
+                startActivity(intent);
+            }
 
+        });
     }
 
 
@@ -34,19 +48,19 @@ public class MainActivity extends AppCompatActivity {
 
             switch (item.getItemId()){
                 case R.id.navigation_home:
-                    Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                    Intent intent = new Intent(ConatctActivity.this, ConatctActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.navigation_notifications:
-                    Intent NotificationIntent = new Intent(MainActivity.this, NotoficationActivity.class);
+                    Intent NotificationIntent = new Intent(ConatctActivity.this, NotoficationActivity.class);
                     startActivity(NotificationIntent);
                     break;
                 case R.id.navigation_settings:
-                    Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
+                    Intent settingsIntent = new Intent(ConatctActivity.this, SettingsActivity.class);
                     startActivity(settingsIntent);
                     break;
                 case R.id.navigation_logout:
-                    Intent logoutIntent = new Intent(MainActivity.this, RegisterActivity.class);
+                    Intent logoutIntent = new Intent(ConatctActivity.this, RegisterActivity.class);
                     FirebaseAuth.getInstance().signOut();
                     startActivity(logoutIntent);
                     finish();
