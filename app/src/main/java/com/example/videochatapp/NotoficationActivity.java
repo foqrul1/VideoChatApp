@@ -23,14 +23,14 @@ public class NotoficationActivity extends AppCompatActivity {
         NotificationList = findViewById(R.id.myNotificationList);
         NotificationList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
     }
-    public static class FindViewHolder extends RecyclerView.ViewHolder {
+    public static class NotificationViewHolder extends RecyclerView.ViewHolder {
         TextView userNametxt;
         Button acceptbtn, cancelBtn;
         ImageView profileImageView;
         RelativeLayout cardView;
 
 
-        public FindViewHolder(@NonNull View itemView) {
+        public NotificationViewHolder(@NonNull View itemView) {
             super(itemView);
 
             userNametxt = itemView.findViewById(R.id.name_notification);
