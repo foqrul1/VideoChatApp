@@ -21,7 +21,7 @@
             android:scaleType="centerCrop"
             android:layout_centerHorizontal="true"
             android:id="@+id/image_notification"
-            android:layout_marginTop="15dp"></ImageView>
+            android:layout_marginTop="15dp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
             android:layout_marginTop="5dp"
             android:textSize="18dp"
             android:layout_below="@+id/image_notification"
-            ></TextView>
+            />
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
             android:text="Accept Friend Request"
             android:textAllCaps="false"
             android:textSize="13dp"
-            ></Button>
+            />
 
         <Button
             android:layout_width="match_parent"
@@ -62,7 +62,7 @@
             android:text="Cancel Friend Request"
             android:textAllCaps="false"
             android:textSize="13dp"
-            ></Button>
+            />
 
     </RelativeLayout>
 

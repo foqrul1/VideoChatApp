@@ -19,7 +19,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <EditText
-                    android:id="@+id/findSearch"
+                    android:id="@+id/Search_User_Text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/white"
@@ -38,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/appbar_layout_findPeople"
-        android:id="@+id/findFriends"
+        android:id="@+id/findFriends_list"
         >
 
     </androidx.recyclerview.widget.RecyclerView>

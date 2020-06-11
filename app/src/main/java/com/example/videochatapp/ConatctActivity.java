@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ConatctActivity extends AppCompatActivity {
-    private BottomNavigationView navigationView;
+    private BottomNavigationView navView;
     private RecyclerView mContactList;
     private ImageView findPeopleBtn;
 
@@ -24,13 +24,17 @@ public class ConatctActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
 
+        //BottomNavigationView navView = findViewById(R.id.nav_view);
+
+        navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
-        navigationView = findViewById(R.id.nav_view);
-        mContactList = findViewById(R.id.myContactList);
+
         findPeopleBtn = findViewById(R.id.findPeoplebtn);
+        mContactList = findViewById(R.id.contact_List);
         mContactList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+
         findPeopleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,7 +71,7 @@ public class ConatctActivity extends AppCompatActivity {
                     break;
 
             }
-            return false;
+            return true;
         }
     };
 

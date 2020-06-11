@@ -32,10 +32,10 @@ import java.util.HashMap;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    private Button save;
-    private EditText userName, userStatus, userBio;
-    private  ImageView profileImage;
-    private static int gallayPic = 1;
+    private Button saveBtn;
+    private EditText userNameEt, userBioEt;
+    private  ImageView profileImageView;
+    private static int GalleyPick = 1;
     private Uri ImageUri;
     private StorageReference userProfileImageRef;
     private String downloadUrl;
@@ -47,27 +47,29 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        save  = findViewById(R.id.setting_Button);
-        userName  = findViewById(R.id.settings_userName);
-        userStatus  = findViewById(R.id.settings_userStatus);
-        profileImage  = findViewById(R.id.settings_profile);
+        saveBtn  = findViewById(R.id.save_setting_Button);
+        userNameEt  = findViewById(R.id.username_settings);
+        userBioEt  = findViewById(R.id.bio_settings);
+        profileImageView  = findViewById(R.id.settings_profile_image);
+
+
         userProfileImageRef = FirebaseStorage.getInstance().getReference().child("Profile Images");
         userRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
         progressDialog = new ProgressDialog(this);
 
-        profileImage.setOnClickListener(new View.OnClickListener() {
+        profileImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent galleryIntent = new Intent();
                 galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
 
                 galleryIntent.setType("image/*");
-                startActivityForResult(galleryIntent, gallayPic);
+                startActivityForResult(galleryIntent, GalleyPick);
 
             }
         });
-        save.setOnClickListener(new View.OnClickListener() {
+        saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 saveUserData();
@@ -75,6 +77,7 @@ public class SettingsActivity extends AppCompatActivity {
 
 
         });
+        retrieveUserInfo();
 
     }
 
@@ -82,15 +85,15 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==gallayPic && resultCode==RESULT_OK &&  data != null){
+        if(requestCode==GalleyPick && resultCode==RESULT_OK &&  data != null){
             ImageUri = data.getData();
-            profileImage.setImageURI(ImageUri);
+            profileImageView.setImageURI(ImageUri);
         }
 
     }
     private void saveUserData() {
-        final String getUserName = userName.getText().toString();
-        final String getUserStatus = userStatus.getText().toString();
+        final String getUserName = userNameEt.getText().toString();
+        final String getUserStatus = userBioEt.getText().toString();
 
         if(ImageUri==null){
             userRef.addValueEventListener(new ValueEventListener() {
@@ -115,7 +118,7 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         else if(getUserStatus.equals("")){
-            Toast.makeText(this, "UserName is Mandatory", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "UserStatus is Mandatory", Toast.LENGTH_SHORT).show();
         }else{
             progressDialog.setTitle("Account Settings");
             progressDialog.setMessage("Please Wait ...");
@@ -153,6 +156,7 @@ public class SettingsActivity extends AppCompatActivity {
                                     Intent intent = new Intent(SettingsActivity.this, ConatctActivity.class);
                                     startActivity(intent);
                                     finish();
+                                    progressDialog.dismiss();
                                     Toast.makeText(SettingsActivity.this, "Profile settings Has Been Updated", Toast.LENGTH_SHORT).show();;
 
                                 }
@@ -166,19 +170,20 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
     private void saveInfoOnlyWithoutImage(){
-        final String getUserName = userName.getText().toString();
-        final String getUserStatus = userStatus.getText().toString();
 
-
-
+        final String getUserName = userNameEt.getText().toString();
+        final String getUserStatus = userBioEt.getText().toString();
 
         if(getUserName.equals("")){
             Toast.makeText(this, "UserName is Mandatory", Toast.LENGTH_SHORT).show();
         }
 
         else if(getUserStatus.equals("")){
-            Toast.makeText(this, "UserName is Mandatory", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "UserStatus is Mandatory", Toast.LENGTH_SHORT).show();
         }else{
+            progressDialog.setTitle("Account Settings");
+            progressDialog.setMessage("Please Wait...");
+            progressDialog.show();
             HashMap<String, Object> profileMap = new HashMap<>();
             profileMap.put("uid", FirebaseAuth.getInstance()
                     .getCurrentUser().getUid());
@@ -213,9 +218,9 @@ public class SettingsActivity extends AppCompatActivity {
                         String nameDb = dataSnapshot.child("name").getValue().toString();
                         String biodDb = dataSnapshot.child("status").getValue().toString();
 
-                        userName.setText(nameDb);
-                        userStatus.setText(biodDb);
-                        Picasso.get().load(imageDb).placeholder(R.drawable.profile_image).into(profileImage);
+                        userNameEt.setText(nameDb);
+                        userBioEt.setText(biodDb);
+                        Picasso.get().load(imageDb).placeholder(R.drawable.profile_image).into(profileImageView);
                     }
                 }
 

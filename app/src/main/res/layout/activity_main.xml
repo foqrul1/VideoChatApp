@@ -41,7 +41,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/appbar_layout_contacts"
         android:layout_above="@+id/nav_view"
-        android:id="@+id/myContactList"
+        android:id="@+id/contact_List"
         >
 
     </androidx.recyclerview.widget.RecyclerView>

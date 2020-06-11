@@ -24,6 +24,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
  public class FindPeopleActivity extends AppCompatActivity {
@@ -37,9 +38,11 @@ import com.squareup.picasso.Picasso;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_people);
 
-        searchEt = findViewById(R.id.findSearch);
-        findFriendList = findViewById(R.id.findFriends);
+        searchEt = findViewById(R.id.Search_User_Text);
+        findFriendList = findViewById(R.id.findFriends_list);
         findFriendList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+        userRef = FirebaseDatabase.getInstance().getReference().child("Users");
         searchEt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -68,14 +71,16 @@ import com.squareup.picasso.Picasso;
          super.onStart();
          FirebaseRecyclerOptions<Contacts> options = null;
          if(str.equals("")){
-             options = new FirebaseRecyclerOptions.Builder<Contacts>()
+             options =
+                     new FirebaseRecyclerOptions.Builder<Contacts>()
                      .setQuery(userRef, Contacts.class).build();
          }else{
              options = new FirebaseRecyclerOptions.Builder<Contacts>()
                      .setQuery(userRef
                              .orderByChild("name")
                              .startAt(str)
-                             .endAt(str+"\uf8ff"), Contacts.class).build();
+                             .endAt(str+"\uf8ff"),
+                             Contacts.class).build();
 
          }
          FirebaseRecyclerAdapter<Contacts, FindFriendsViewHolder> firebaseRecyclerAdapter
@@ -102,7 +107,7 @@ import com.squareup.picasso.Picasso;
              @NonNull
              @Override
              public FindFriendsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.contact_design, parent, true);
+                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.contact_design, parent, false);
                  FindFriendsViewHolder viewHolder = new FindFriendsViewHolder(view);
                  return viewHolder;
              }
@@ -113,16 +118,16 @@ import com.squareup.picasso.Picasso;
      }
 
      public static class FindFriendsViewHolder extends RecyclerView.ViewHolder {
-         TextView userNametxt;
-         Button videoCallBtn;
-         ImageView profileImageView;
-         RelativeLayout cardView;
+          TextView userNametxt;
+          Button videoCallBtn;
+          ImageView profileImageView;
+          RelativeLayout cardView;
 
 
          public FindFriendsViewHolder(@NonNull View itemView) {
              super(itemView);
 
-             userNametxt = itemView.findViewById(R.id.contact);
+             userNametxt = itemView.findViewById(R.id.name_contact);
              videoCallBtn = itemView.findViewById(R.id.call_btn);
              profileImageView = itemView.findViewById(R.id.image_contact);
              cardView = itemView.findViewById(R.id.cardView1);
