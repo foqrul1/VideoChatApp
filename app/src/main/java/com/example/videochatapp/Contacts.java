@@ -1,11 +1,13 @@
 package com.example.videochatapp;
 
 public class Contacts {
+
     String name, image, status, uid;
 
-    public Contacts(){
-
+    public Contacts() {
     }
+
+
     public Contacts(String name, String image, String status, String uid) {
         this.name = name;
         this.image = image;

@@ -5,47 +5,62 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout_contacts"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/appbar_layout_contacts">
+        android:layout_height="wrap_content">
+
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_contacts"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/toolbar_Contacts">
+            android:layout_height="50dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/white"
-                    android:text="contacts"
-                    android:textSize="20dp"
-                    android:layout_centerVertical="true"/>
+                    android:text="Contacts"
+                    android:textSize="20sp"
+                    android:layout_centerVertical="true"
+                    android:textStyle="bold"
+                    android:textColor="#ffff"/>
+
                 <ImageView
+                    android:id="@+id/find_people_btn"
                     android:layout_width="38dp"
                     android:layout_height="40dp"
-                    android:id="@+id/findPeoplebtn"
                     android:layout_alignParentEnd="true"
-                    android:src="@drawable/find_people"
                     android:layout_marginEnd="12dp"
-                    android:tint="@android:color/white"/>
+                    android:src="@drawable/find_people"
+                    android:tint="#ffff"/>
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
+
     </com.google.android.material.appbar.AppBarLayout>
 
 
-    <androidx.recyclerview.widget.RecyclerView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/appbar_layout_contacts"
-        android:layout_above="@+id/nav_view"
-        android:id="@+id/contact_List"
-        >
-
-    </androidx.recyclerview.widget.RecyclerView>
-
+        android:layout_height="wrap_content"
+        android:layout_below="@id/app_bar_layout_contacts">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_story"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+               android:layout_margin="5dp"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/contact_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/nav_view"/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
@@ -54,7 +69,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
         android:background="?android:attr/windowBackground"
-       android:layout_alignParentBottom="true"
+        android:layout_alignParentBottom="true"
         app:menu="@menu/bottom_nav_menu" />
 
 

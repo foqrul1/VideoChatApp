@@ -12,48 +12,55 @@
         android:layout_height="250dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:src="@drawable/profile_image"/>
+        android:src="@drawable/profile_image"
+        android:contentDescription="@null"
+        android:layout_marginTop="50dp"/>
+
     <EditText
         android:id="@+id/username_settings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/edit_profile"
+        android:drawableStart="@drawable/edit_profile"
+        android:drawableTint="#ffff"
         android:layout_below="@+id/settings_profile_image"
-        android:drawableTint="@android:color/white"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
         android:layout_marginTop="20dp"
-        android:hint="Edit your Name"
-        android:textColor="@android:color/white"
-        android:backgroundTint="@android:color/white"
-        android:textColorHint="@android:color/white" />
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        android:hint="Write your name"
+        android:backgroundTint="#ffff"
+        android:textColorHint="#ffff"
+        android:textColor="#ffff"
+        android:autofillHints="@null"
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/bio_settings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableStart="@drawable/edit_status"
+        android:drawableTint="#ffff"
         android:layout_below="@+id/username_settings"
-        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginTop="10dp"
-        android:drawableLeft="@drawable/edit_status"
-        android:drawableTint="@android:color/white"
-        android:backgroundTint="@android:color/white"
-        android:hint="Edit your Status"
-        android:textColorHint="@android:color/white" />
+        android:layout_marginStart="15dp"
+        android:hint="Bio"
+        android:backgroundTint="#ffff"
+        android:textColorHint="#ffff"
+        android:textColor="#ffff"
+        android:autofillHints="@null"
+        android:inputType="text" />
 
     <Button
+        android:id="@+id/save_settings_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/bio_settings"
         android:layout_marginTop="30dp"
-        android:layout_marginStart="15dp"
         android:layout_marginEnd="18dp"
-        android:textColor="@android:color/background_dark"
+        android:layout_marginStart="18dp"
         android:text="Save"
-        android:textAlignment="center"
-        android:id="@+id/save_setting_Button"/>
+        android:textColor="#0000"
+        />
 
 
 </RelativeLayout>
