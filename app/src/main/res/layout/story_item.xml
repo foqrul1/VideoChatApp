@@ -22,7 +22,7 @@
         android:layout_gravity="center"
         android:src="@drawable/placeholder"
         android:layout_marginTop="5dp"
-        android:id="@+id/sory_photo_seen"
+        android:id="@+id/story_photo_seen"
         android:visibility="gone"/>
     <TextView
         android:layout_width="wrap_content"
