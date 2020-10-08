@@ -40,10 +40,6 @@ public class ConatctActivity extends AppCompatActivity {
     private String userName="", profileImage="";
     private String calledBy="";
 
-    private RecyclerView recyclerView_story;
-    private StoryAdapter storyAdapter;
-    private List<Story> storyList;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,16 +60,8 @@ public class ConatctActivity extends AppCompatActivity {
         myContactList = findViewById(R.id.contact_list);
         myContactList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-        recyclerView_story = findViewById(R.id.recycler_view_story);
-        recyclerView_story.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(),
                 LinearLayoutManager.HORIZONTAL, false);
-        recyclerView_story.setLayoutManager(linearLayoutManager);
-        storyList =  new ArrayList<>();
-        storyAdapter = new StoryAdapter(getApplicationContext(), storyList);
-        recyclerView_story.setAdapter(storyAdapter);
-
-
 
 
         findPeopleBtn.setOnClickListener(new View.OnClickListener() {
@@ -238,22 +226,6 @@ public class ConatctActivity extends AppCompatActivity {
         });
 
     }
-    private void readStory(){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Story");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                long timecurrent  = System.currentTimeMillis();
-                storyList.clear();
-                storyList.add(new Story("", 0, 0, "",
-                        FirebaseAuth.getInstance().getCurrentUser().getUid()));
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        })
-    }
 
 }
